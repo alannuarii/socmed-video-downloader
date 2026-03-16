@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NestDL - Premium Video Downloader</title>
+    <meta name="description" content="Download high quality videos from YouTube, Instagram, and TikTok instantly.">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-elements">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <main class="container">
+        <header class="header">
+            <h1 class="logo"><i class="fa-solid fa-cloud-arrow-down"></i> NestDL</h1>
+            <p class="subtitle">Download premium videos from YouTube, Instagram & TikTok.</p>
+        </header>
+
+        <section class="downloader-card">
+            <form id="downloadForm" class="download-form">
+                <div class="input-group">
+                    <i class="fa-solid fa-link input-icon"></i>
+                    <input type="url" id="videoUrl" placeholder="Paste video link here..." required autocomplete="off">
+                    <button type="submit" id="submitBtn" class="btn-primary">
+                        <span>Download</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+                <p id="errorMsg" class="error-text hidden"></p>
+            </form>
+
+            <div id="progressArea" class="progress-area hidden">
+                <div class="status-indicator">
+                    <div class="spinner"></div>
+                    <span id="statusText">Processing link...</span>
+                </div>
+                
+                <div class="progress-container">
+                    <div id="progressBar" class="progress-bar"></div>
+                </div>
+                
+                <div class="stats-row">
+                    <div class="stat"><i class="fa-solid fa-bolt"></i> <span id="speedText">--</span></div>
+                    <div class="stat"><i class="fa-solid fa-clock"></i> <span id="etaText">--</span></div>
+                    <div class="stat"><span id="percentText">0%</span></div>
+                </div>
+            </div>
+            
+            <div id="successArea" class="success-area hidden">
+                <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
+                <h3>Download Completed!</h3>
+                <p>Your download should begin automatically.</p>
+                <button id="downloadAgainBtn" class="btn-secondary">Download Another</button>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature-card">
+                <i class="fa-brands fa-youtube feature-icon yt-color"></i>
+                <h3>YouTube</h3>
+                <p>Supports up to 4K combined video & audio.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fa-brands fa-instagram feature-icon ig-color"></i>
+                <h3>Instagram</h3>
+                <p>Download reels and posts seamlessly.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fa-brands fa-tiktok feature-icon tt-color"></i>
+                <h3>TikTok</h3>
+                <p>Get viral videos fast and efficiently.</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
