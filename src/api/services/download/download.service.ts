@@ -64,15 +64,22 @@ export class DownloadService {
         });
       }
 
-      // Check for merger or final destination
-      const destRegex = /\[(?:download|Merger)\] Destination:\s+(.+)/;
+      // Check for normal download destination
+      const destRegex = /\[download\] Destination:\s+(.+)/;
       const destMatch = output.match(destRegex);
       if (destMatch) {
          finalFilename = destMatch[1];
       }
 
+      // Check for merger format
+      const mergerRegex = /\[Merger\] Merging formats into "([^"]+)"/;
+      const mergerMatch = output.match(mergerRegex);
+      if (mergerMatch) {
+         finalFilename = mergerMatch[1];
+      }
+
       // Sometimes the file is already downloaded
-      const alreadyDownloadedRegex = /\[download\]\s+(.+)\s+has already been downloaded/;
+      const alreadyDownloadedRegex = /\[download\]\s+(.*?)\s+has already been downloaded/;
       const alreadyMatch = output.match(alreadyDownloadedRegex);
       if (alreadyMatch) {
          finalFilename = alreadyMatch[1];
