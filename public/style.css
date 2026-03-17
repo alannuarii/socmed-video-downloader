@@ -78,19 +78,10 @@ body {
   margin-bottom: 3rem;
 }
 
-.header-top {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 0.5rem;
-  position: relative;
-}
-
 .logo {
   font-size: 3rem;
   font-weight: 700;
-  margin-bottom: 0;
+  margin-bottom: 0.5rem;
   background: linear-gradient(to right, #60a5fa, #c084fc);
   -webkit-background-clip: text;
   background-clip: text;
