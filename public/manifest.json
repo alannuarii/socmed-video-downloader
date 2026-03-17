@@ -1,0 +1,17 @@
+{
+  "name": "NestDL - Premium Video Downloader",
+  "short_name": "NestDL",
+  "description": "Download high-quality videos from YouTube, Instagram, and TikTok instantly.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
