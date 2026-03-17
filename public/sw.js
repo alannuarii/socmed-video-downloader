@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nestdl-cache-v1';
+const CACHE_NAME = 'nestdl-cache-v2';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -6,48 +6,52 @@ const urlsToCache = [
   '/script.js',
   '/manifest.json',
   '/icon.svg',
-  'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap',
-  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
+  '/icon-192.png',
+  '/icon-512.png'
 ];
 
 self.addEventListener('install', event => {
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
+        // Cache local assets individually, skip failures for external CDN
         return cache.addAll(urlsToCache);
+      })
+      .catch(err => {
+        console.error('Cache addAll failed:', err);
       })
   );
 });
 
 self.addEventListener('fetch', event => {
-  // Hanya gunakan cache untuk sumber daya statis frontend, jangan cache jalur `/api/` (SSE & Unduhan backend).
+  // Bypass cache for API calls and SSE streams
   if (event.request.url.includes('/api/')) {
     return;
   }
-  
+
   event.respondWith(
     caches.match(event.request)
       .then(response => {
-        if (response) {
-          return response; // Gunakan versi chace
+        return response || fetch(event.request);
+      })
+      .catch(() => {
+        // If both cache and network fail, return offline fallback for navigation
+        if (event.request.mode === 'navigate') {
+          return caches.match('/index.html');
         }
-        return fetch(event.request); // Kalau tidak, fetch dari jaringan
       })
   );
 });
 
-// Bersihkan cache lama kalau ada versi baru dari Service Worker.
 self.addEventListener('activate', event => {
-  const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
-        cacheNames.map(cacheName => {
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
-            return caches.delete(cacheName);
-          }
-        })
+        cacheNames
+          .filter(name => name !== CACHE_NAME)
+          .map(name => caches.delete(name))
       );
-    })
+    }).then(() => self.clients.claim())
   );
 });
