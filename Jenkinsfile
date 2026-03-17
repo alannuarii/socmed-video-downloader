@@ -13,11 +13,6 @@ pipeline {
             }
         }
 
-        stage('Install Dependencies') {
-            steps {
-                sh 'npm install'
-            }
-        }
 
         stage('Docker Build & Tag') {
             steps {
