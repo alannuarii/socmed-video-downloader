@@ -108,10 +108,15 @@ body {
 
 /* Form Styles */
 .input-group {
+  display: flex;
+  gap: 1rem;
+}
+
+.input-wrapper {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  flex-grow: 1;
 }
 
 .input-icon {
@@ -356,6 +361,11 @@ input[type="url"]:focus {
   .input-group {
     flex-direction: column;
     gap: 0.8rem;
+    width: 100%;
+  }
+
+  .input-wrapper {
+    width: 100%;
   }
   
   .btn-primary {
